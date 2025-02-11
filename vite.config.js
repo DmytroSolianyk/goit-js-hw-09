@@ -1,8 +1,10 @@
-import { defineConfig } from 'vite';
+import commonjs from '@rollup/plugin-commonjs';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import { glob } from 'glob';
-import injectHTML from 'vite-plugin-html-inject';
-import FullReload from 'vite-plugin-full-reload';
 import SortCss from 'postcss-sort-media-queries';
+import { defineConfig } from 'vite';
+import FullReload from 'vite-plugin-full-reload';
+import injectHTML from 'vite-plugin-html-inject';
 
 export default defineConfig(({ command }) => {
   return {
@@ -43,6 +45,8 @@ export default defineConfig(({ command }) => {
       SortCss({
         sort: 'mobile-first',
       }),
+      nodeResolve({ browser: true }),
+      commonjs(),
     ],
   };
 });
